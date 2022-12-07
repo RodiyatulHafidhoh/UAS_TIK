@@ -1,0 +1,75 @@
+table user_dosen{
+  id int [pk, increment]
+  nip int
+  username str
+  password str
+}
+table user_staff{
+  id int [pk, increment]
+  nip int
+  username str
+  password str
+}
+table user_mahasiswa{
+  id int [pk, increment]
+  nim int
+  username str
+  password str
+}
+table profil_mahasiswa{
+  id int [pk, increment]
+  nama_lengkap str
+  tanggal_lahir date
+  alamat str
+  status str
+  id_mahasiswa int [ref: > user_mahasiswa.id]
+  id_fakultas int [ref:> fakultas.id]
+  id_prodi int [ref: > program_studi.id]
+  
+}
+table profil_dosen{
+  id int [pk, increment]
+  nama_lengkap str
+  tanggal_lahir date
+  alamat str
+  status str
+  id_dosen int [ref: > user_dosen.id]
+  id_fakultas int [ref: > fakultas.id]
+  id_prodi int [ref: > program_studi.id]
+  
+}
+table profil_staff{
+  id int [pk, increment]
+  nama_lengkap str
+  tanggal_lahir date
+  alamat str
+  status str
+  id_staf str [ref: > user_staff.id]
+}
+
+table mata_kuliah {
+  id int [pk, increment]
+  kode_mk int
+  nama_mk str
+  nilai int
+  id_dosen int [ref: > user_dosen.id]
+  id_mahasiswa int [ref:> user_mahasiswa.id]
+}
+table fakultas {
+  id int [pk, increment ]
+  nama_fakultas str
+}
+table program_studi {
+  id int [pk, increment]
+  kode_prodi str
+  nama_prodi str
+}
+table pengalaman {
+  id int [pk, increment]
+  nama_organisasi str
+  tahun int
+  id_mahasiswa int [ref:> user_mahasiswa.id]
+}
+
+
+Ref: "user_dosen"."nip" < "user_dosen"."username"
